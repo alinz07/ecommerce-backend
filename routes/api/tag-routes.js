@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['product_name'],
       }
     ]
   })
@@ -31,11 +30,16 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['product_name'],
       }
     ]
   })
-  .then(tagData => res.json(tagData))
+  .then(tagData => {
+    if (!tagData) {
+      res.status(400).json({message: 'No category with this id'});
+      return;
+    }
+    res.json(tagData)
+  })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -46,7 +50,7 @@ router.post('/', (req, res) => {
   // create a new tag
   //example for my sake
   // {
-  //   tag_name: 'rock music',
+  //   "tag_name": "rock music",
   // }
   Tag.create(req.body)
   .then(tagData => res.json(tagData))
@@ -64,10 +68,6 @@ router.put('/:id', (req, res) => {
     }
   })
   .then(tagData => {
-    if (!tagData) {
-      res.status(400).json({message: 'No tag found with this id'});
-      return;
-    }
     res.json(tagData);
   })
   .catch(err => {

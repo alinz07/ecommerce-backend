@@ -10,9 +10,6 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Category,
-        attributes: [
-          'category_name'
-        ]
       },
       {
         model: Tag,
@@ -40,19 +37,19 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Category,
-        attributes: [
-          'category_name'
-        ]
       },
       {
         model: Tag,
-        attributes: [
-          'tag_name'
-        ]
       }
     ]
   })
-  .then(productData => res.json(productData))
+  .then(productData => {
+    if (!productData) {
+      res.status(400).json({message: 'No product with this id'});
+      return;
+    }
+    res.json(productData);
+  })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
