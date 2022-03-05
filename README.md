@@ -1,7 +1,7 @@
 # E-commerce Back End Starter Code
 <br/>
 
-## **Link** to video walkthrough to demonstrate app functionality:  
+## **Link** to video walkthrough to demonstrate app functionality: https://drive.google.com/file/d/1IIZau0uRP8h1FsaSFpihcZrEHgtrjyFB/view 
 
 ## **Link** to project repository: https://github.com/alinz07/mod13-ecommerce-backend 
 <br/>
